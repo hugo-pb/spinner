@@ -1,17 +1,16 @@
-const spinner = counter => {
-  if (!counter) {
-    counter = 1;
-  }
-  if (counter === 30) {
+const spinner = (counter = 1, index = 0) => {
+  if (counter === 10) {
     return;
   }
   const sumb = ["\r|   ", "\r/   ", "\r-   ", "\r\\   "];
-  for (s of sumb) {
-    setTimeout(() => {
-      process.stdout.write(s);
-    }, 500);
+  if (index > sumb.length - 1) {
+    index = 0;
   }
-  counter++;
-  spinner(counter);
+  setTimeout(() => {
+    process.stdout.write(sumb[index]);
+    index++;
+    counter++;
+    spinner(counter, index);
+  }, 500);
 };
 spinner();
